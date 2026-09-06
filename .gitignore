@@ -1,0 +1,33 @@
+# Dependencias y build
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+.expo/
+coverage/
+*.tsbuildinfo
+
+# Secretos y configuracion local
+.env
+.env.local
+.env*.local
+.mcp.json
+.claude/settings.local.json
+*-service-account*.json
+serviceAccount*.json
+*.pem
+*.key
+
+# Datos locales (BD, cache, fotos, sesion del portal)
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Sistema y logs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

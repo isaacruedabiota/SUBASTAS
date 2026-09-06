@@ -1,0 +1,48 @@
+{
+  "name": "subastas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agregador personal de subastas públicas españolas",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=@subastas/web",
+    "dev:mobile": "turbo run dev --filter=@subastas/mobile",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "ingest": "npm run start --workspace=@subastas/ingest --",
+    "migrate": "npm run migrate --workspace=@subastas/db",
+    "enriquecer": "npm run enriquecer --workspace=@subastas/ingest --",
+    "ficha": "npm run ficha --workspace=@subastas/ingest --",
+    "precargar": "npm run precargar --workspace=@subastas/ingest --",
+    "alertas": "npm run alertas --workspace=@subastas/ingest --",
+    "calles": "npm run calles --workspace=@subastas/ingest --",
+    "fotos": "npm run fotos --workspace=@subastas/ingest --",
+    "readjuntos": "npm run readjuntos --workspace=@subastas/ingest --",
+    "geocodificar": "npm run geocodificar --workspace=@subastas/ingest --",
+    "repujas": "npm run repujas --workspace=@subastas/ingest --",
+    "probar-sesion": "npm run probar-sesion --workspace=@subastas/ingest --",
+    "entrar": "npm run entrar --workspace=@subastas/ingest --",
+    "pujas": "npm run pujas --workspace=@subastas/ingest --",
+    "basicas": "npm run basicas --workspace=@subastas/ingest --",
+    "reminimas": "npm run reminimas --workspace=@subastas/ingest --",
+    "notificar": "npm run notificar --workspace=@subastas/ingest --"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.5",
+    "typescript": "^5.9.2"
+  },
+  "//overrides": "Expo 57 fija react 19.2.3 y Next 16 usa 19.2.4. npm dejaba la 19.2.3 en la raíz y la 19.2.4 en apps/web: dos copias de React en el mismo árbol de Server Components, que revienta con 'chunk.reason.enqueueModel is not a function'. Un monorepo necesita una sola versión.",
+  "overrides": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "packageManager": "npm@11.16.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

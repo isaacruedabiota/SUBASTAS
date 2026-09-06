@@ -1,0 +1,51 @@
+{
+  "name": "@subastas/ingest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./portal": "./src/sources/portal-subastas/index.ts",
+    "./portal-fotos": "./src/sources/portal-subastas/descargar-fotos.ts",
+    "./catastro": "./src/sources/catastro/index.ts",
+    "./sesion": "./src/sources/portal-subastas/sesion.ts",
+    "./notificaciones": "./src/notificaciones/index.ts",
+    "./boe": "./src/sources/boe-api/index.ts",
+    "./cartociudad": "./src/sources/cartociudad/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "enriquecer": "tsx src/enriquecer.ts",
+    "ficha": "tsx src/ficha.ts",
+    "precargar": "tsx src/precargar.ts",
+    "alertas": "tsx src/alertas.ts",
+    "typecheck": "tsc --noEmit",
+    "calles": "tsx src/calles.ts",
+    "fotos": "tsx src/fotos.ts",
+    "readjuntos": "tsx src/reparsear-adjuntos.ts",
+    "geocodificar": "tsx src/geocodificar.ts",
+    "repujas": "tsx src/reparsear-pujas.ts",
+    "probar-sesion": "tsx src/probar-sesion.ts",
+    "entrar": "tsx src/entrar.ts",
+    "pujas": "tsx src/refrescar-pujas.ts",
+    "basicas": "tsx src/basicas.ts",
+    "reminimas": "tsx src/reparsear-minimas.ts",
+    "notificar": "tsx src/notificar.ts"
+  },
+  "dependencies": {
+    "@subastas/core": "*",
+    "@subastas/db": "*",
+    "cheerio": "^1.2.0",
+    "fast-xml-parser": "^5.10.1",
+    "nodemailer": "^9.0.3",
+    "web-push": "^3.6.7",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "@types/nodemailer": "^8.0.1",
+    "@types/web-push": "^3.6.4",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  }
+}

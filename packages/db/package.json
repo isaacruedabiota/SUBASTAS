@@ -1,0 +1,35 @@
+{
+  "name": "@subastas/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./anuncios": "./src/anuncios.ts",
+    "./catastro": "./src/catastro.ts",
+    "./subastas": "./src/subastas.ts",
+    "./consultas": "./src/consultas.ts",
+    "./alertas": "./src/alertas.ts",
+    "./cola": "./src/cola.ts",
+    "./calles": "./src/calles.ts",
+    "./adjuntos": "./src/adjuntos.ts",
+    "./geocodificacion": "./src/geocodificacion.ts",
+    "./cuentas": "./src/cuentas.ts",
+    "./ajustes": "./src/ajustes.ts",
+    "./notificaciones": "./src/notificaciones.ts"
+  },
+  "scripts": {
+    "migrate": "tsx src/migrate.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@subastas/core": "*"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.4",
+    "@types/node": "^24",
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Sistema de color.
+
+   Tokens semánticos (superficie, texto, riesgo…) en vez de colores sueltos:
+   así el tema claro y el oscuro se definen una sola vez y ningún componente
+   necesita saber en cuál está.
+
+   Todos los pares texto/fondo cumplen WCAG AA (≥4.5:1 en texto normal).
+--------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------
+   Oscuro por defecto, claro a petición.
+
+   El tema NO se decide con `prefers-color-scheme`: lo decide la cookie `tema`,
+   que el layout lee en el servidor y estampa como `data-tema` en <html>. Así el
+   HTML ya llega con el tema puesto y **no hay parpadeo** — ni el destello blanco
+   del truco clásico de leer localStorage en un script, ni una segunda pintada.
+
+   Que el valor por defecto viva en `:root` (y no en un `[data-tema="oscuro"]`)
+   es deliberado: sin cookie, sin JavaScript o si algo falla, sale oscuro.
+--------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: dark;
+
+  /* Superficies, de más profunda a más elevada */
+  --fondo: #0a0c10;
+  --superficie: #12161c;
+  --superficie-alta: #1a1f27;
+  --borde: #262c36;
+  --borde-fuerte: #39414d;
+
+  /* Texto: 16.3:1 · 8.6:1 · 5.7:1 sobre --fondo */
+  --texto: #f0f3f7;
+  --texto-suave: #a9b3bf;
+  --texto-tenue: #88929f;
+
+  /* Semánticos. "oportunidad" = descuento sobre tasación,
+     "riesgo" = cargas o datos sin informar, "dato" = enriquecimiento externo. */
+  --oportunidad: #34d399;
+  --oportunidad-fondo: #052e23;
+  --oportunidad-borde: #10603f;
+
+  --riesgo: #fbbf24;
+  --riesgo-fondo: #2b1f05;
+  --riesgo-borde: #6b4c0c;
+
+  --dato: #60a5fa;
+  --dato-fondo: #0a1d3a;
+  --dato-borde: #1e4079;
+
+  --activo: #34d399;
+  --inactivo: #8b95a3;
+
+  --acento: #f0f3f7;
+  --acento-texto: #0a0c10;
+}
+
+:root[data-tema='claro'] {
+  color-scheme: light;
+
+  --fondo: #f7f9fb;
+  --superficie: #ffffff;
+  --superficie-alta: #eef2f6;
+  --borde: #dde3ea;
+  --borde-fuerte: #c3ccd6;
+
+  /* 18.9:1 · 8.1:1 · 5.4:1 sobre --fondo.
+     El tenue se usa en tamaños de 11px, así que va deliberadamente más oscuro
+     de lo que pediría el gusto: a #6b7684 se quedaba en 4.4:1 y no pasaba AA. */
+  --texto: #0d1117;
+  --texto-suave: #495563;
+  --texto-tenue: #5b6472;
+
+  --oportunidad: #047857;
+  --oportunidad-fondo: #ecfdf5;
+  --oportunidad-borde: #a7f3d0;
+
+  --riesgo: #b45309;
+  --riesgo-fondo: #fffbeb;
+  --riesgo-borde: #fde68a;
+
+  --dato: #1d4ed8;
+  --dato-fondo: #eff6ff;
+  --dato-borde: #bfdbfe;
+
+  --activo: #047857;
+  --inactivo: #64748b;
+
+  --acento: #0f172a;
+  --acento-texto: #ffffff;
+}
+
+/* Se exponen como utilidades de Tailwind: bg-superficie, text-suave, etc. */
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-alta: var(--superficie-alta);
+  --color-borde: var(--borde);
+  --color-borde-fuerte: var(--borde-fuerte);
+
+  --color-texto: var(--texto);
+  --color-suave: var(--texto-suave);
+  --color-tenue: var(--texto-tenue);
+
+  --color-oportunidad: var(--oportunidad);
+  --color-oportunidad-fondo: var(--oportunidad-fondo);
+  --color-oportunidad-borde: var(--oportunidad-borde);
+
+  --color-riesgo: var(--riesgo);
+  --color-riesgo-fondo: var(--riesgo-fondo);
+  --color-riesgo-borde: var(--riesgo-borde);
+
+  --color-dato: var(--dato);
+  --color-dato-fondo: var(--dato-fondo);
+  --color-dato-borde: var(--dato-borde);
+
+  --color-activo: var(--activo);
+  --color-inactivo: var(--inactivo);
+  --color-acento: var(--acento);
+  --color-acento-texto: var(--acento-texto);
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Base. Va dentro de @layer: las reglas sin capa ganan a TODAS las utilidades
+   de Tailwind, que es justo lo que rompía el contraste antes.
+--------------------------------------------------------------------------- */
+
+@layer base {
+  body {
+    background-color: var(--fondo);
+    color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Los importes y superficies se comparan en columna: cifras de ancho fijo. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--dato);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--dato);
+    color: var(--superficie);
+  }
+}
+
+@layer utilities {
+  /* Barra de descuento: el ancho lo fija una custom property en línea. */
+  .barra-relleno {
+    width: var(--pct, 0%);
+  }
+}
